@@ -28,12 +28,12 @@
 
   <div class="field">
     <%= form.label :salary %>
-    <%= form.text_field :salary %>
+    <%= form.number_field :salary, step: 0.01 %>
   </div>
 
   <div class="field">
     <%= form.label :gender %>
-    <%= form.number_field :gender %>
+    <%= form.select :gender, contact.class.genders.keys %>
   </div>
 
   <div class="actions">
