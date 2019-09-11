@@ -54,10 +54,14 @@ class ContactsController < ApplicationController
   # DELETE /contacts/1
   # DELETE /contacts/1.json
   def destroy
-    @contact.destroy
     respond_to do |format|
-      format.html { redirect_to contacts_url, notice: 'Contact was successfully destroyed.' }
-      format.json { head :no_content }
+      if @contact.destroy
+        format.html { redirect_to contacts_url, notice: 'Contact was successfully destroyed.' }
+        format.json { head :no_content }
+      else
+        format.html { redirect_to contacts_url, notice: @contact.errors }
+        format.json { render json: @contact.errors, status: :unprocessable_entity }
+      end
     end
   end
 
